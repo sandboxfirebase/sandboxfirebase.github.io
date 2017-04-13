@@ -56,11 +56,21 @@ $( document ).ready(function() {
     } );
 
     $("#add-btn").click( function(){
-        var maxid, uid = [];
+        $(".add-form").show();
+    } );
+
+    $("#add-btn-submit").click( function(e) { e.preventDefault();
+        var maxid, uid = [], input = $("#add-btn-inputfield").val();
         dbUsers.on( "child_added" , snap => uid.push( snap.key.split("_")[1] ) );
         id = 1 + Math.max.apply( Math, uid );
         id = "user_" + ("00" + id).substr(-3);
-        dbUsers.child(id).set({ Email: "@", Name: "A", Surname: "B" });
+        dbUsers.child(id).set(
+            {
+                Email: input.split(",")[0],
+                Name: input.split(",")[1],
+                Surname: input.split(",")[2]
+            }
+        );
     } );
 
 });
