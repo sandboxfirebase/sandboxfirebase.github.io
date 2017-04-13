@@ -56,6 +56,14 @@ $( document ).ready(function() {
             ) );
     } );
 
+    $("#add-btn").click( function(){
+        var maxid, uid = [];
+        dbUsers.on( "child_added" , snap => uid.push( snap.key.split("_")[1] ) );
+        id = 1 + Math.max.apply( Math, uid );
+        id = "user_" + ("00" + id).substr(-3);
+        dbUsers.child(id).set({ Email: "@", Name: "A", Surname: "B" });
+    } );
+
 });
 
 function run () {
