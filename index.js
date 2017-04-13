@@ -19,8 +19,7 @@ $( document ).ready(function() {
         var name = snap.child("Name").val();
         var surname = snap.child("Surname").val();
         $btn = $("<button>").text("Remove").on("click" , function(){
-            var rid = $(this).parent().parent().attr("id");
-            db.child("Users").child("user_003").set(null);
+            db.child("Users").child( $(this).parents("tr").attr("id") ).set(null);
         } );
         $("#content-table > tbody")
             .append(
