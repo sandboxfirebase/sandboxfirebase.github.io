@@ -61,6 +61,6 @@ $( document ).ready(function() {
 function run () {
     // firebaseDatabaseRef = firebase.database().ref();
     // firebaseDatabaseRef.child("Text").set("Some value");
-    var db = firebase.database().ref();
-    db.child("Users").child("user_003").set();
+    // var db = firebase.database().ref();
+    // db.child("Users").child("user_003").set();
 }
