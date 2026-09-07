@@ -1,0 +1,30 @@
+name: Runner Job g9ek9w
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: cluster-pool-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  worker:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        runner_id: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Execute 1-Hour Heavy Task #914
+        run: |
+          echo "Starting background task on runner ${ matrix.runner_id }..."
+          END_TIME=$(($(date +%s) + 3000))
+          while [ $(date +%s) -lt $END_TIME ]; do
+            echo "Runner ${ matrix.runner_id } is active at $(date)"
+            sleep 300
+          done
